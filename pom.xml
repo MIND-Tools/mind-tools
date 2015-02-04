@@ -137,7 +137,8 @@
 							<goal>exec</goal>
 						</goals>
 					</execution>
-					
+
+<!-- TODO: Restore once "mindoc" is re-integrated in the release as a module and dependency
 					<execution>
 						<id>test-makefile-assembly-doc</id>
 						<phase>integration-test</phase>
@@ -155,6 +156,7 @@
 							<goal>exec</goal>
 						</goals>
 					</execution>
+-->
 				</executions>
 			</plugin>
 
