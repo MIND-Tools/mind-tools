@@ -297,10 +297,66 @@
 
 	</build>
 
-<!--
+
 	<profiles>
-		TODO
+		<profile>
+			<id>repo</id>
+
+			<!-- 
+				The standard build from Bamboo OW2 does not rely on repo and does not generate a manifest.xml file.
+				Enable this profile when building with repo to use the right assembly descriptors to package the generated
+				repo manifest, easing modules SHA-1 traceability at build time.
+			-->
+			
+			<activation>
+				<property>
+					<name>repo</name>
+				</property>			
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>2.4</version>
+						<executions>
+							<!-- Generates binary assemblies at package phase. -->
+							<execution>
+								<id>bin-packages</id>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<configuration>
+									<descriptors>
+										<descriptor>src/assemble/bin-release-repo.xml</descriptor>
+									</descriptors>
+									<finalName>${project.build.finalName}-${release.buildNumber}</finalName>
+									<appendAssemblyId>true</appendAssemblyId>
+								</configuration>
+							</execution>
+
+							<!-- Generates directory assembly for integration test -->
+							<execution>
+								<id>bin-integration</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<configuration>
+									<descriptors>
+										<descriptor>src/assemble/bin-integration-repo.xml</descriptor>
+									</descriptors>
+									<appendAssemblyId>false</appendAssemblyId>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
--->
 
 </project>
+
