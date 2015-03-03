@@ -28,11 +28,6 @@
 			<outputDirectory>runtime</outputDirectory>
 			<fileMode>0644</fileMode>
 		</file>
-		<file>
-			<source>src/assemble/resources/manifest.xml</source>
-			<outputDirectory>manifest</outputDirectory>
-			<fileMode>0644</fileMode>
-		</file>
 	</files>
 
 </assembly>
