@@ -40,12 +40,21 @@
 
 	<modules>
 		<module>mind-compiler</module>
+		<module>mindoc</module>
 	</modules>
 
 	<dependencies>
 		<dependency>
 			<groupId>${modules.common.groupId}</groupId>
 			<artifactId>mindc</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>mindoc</artifactId>
 			<version>${modules.common.version}</version>
 			<classifier>bin</classifier>
 			<type>zip</type>
@@ -138,7 +147,6 @@
 						</goals>
 					</execution>
 
-<!-- TODO: Restore once "mindoc" is re-integrated in the release as a module and dependency
 					<execution>
 						<id>test-makefile-assembly-doc</id>
 						<phase>integration-test</phase>
@@ -156,7 +164,6 @@
 							<goal>exec</goal>
 						</goals>
 					</execution>
--->
 				</executions>
 			</plugin>
 
