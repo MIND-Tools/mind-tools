@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.ow2.mind</groupId>
+
+	<parent>
+		<groupId>org.ow2.mind</groupId>
+		<artifactId>mind-parent</artifactId>
+		<version>7-SNAPSHOT</version>
+		<relativePath>maven/mind-parent</relativePath>
+	</parent>
+
+	<name>MIND Tools</name>
+	<packaging>pom</packaging>
+
+	<description>
+      MIND Tools is the whole tool-set supporting the development of 
+      component-based software written with the MIND programming model,
+      including compiler, documentation generator, and additional plugins.
+	</description>
+
+	<artifactId>mind-tools</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	
+<!--
+	<ciManagement>
+		TODO
+	</ciManagement>
+-->
+
+	<properties>
+		<modules.common.groupId>org.ow2.mind</modules.common.groupId>
+		<modules.common.version>2.2-SNAPSHOT</modules.common.version>
+
+		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+		<release.buildNumber>${maven.build.timestamp}</release.buildNumber>
+	</properties>
+
+	<modules>
+		<module>mind-compiler</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>mindc</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>unpack-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<excludeTransitive>true</excludeTransitive>
+							<includeClassifiers>bin</includeClassifiers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<!-- Generates binary assemblies at package phase. -->
+					<execution>
+						<id>bin-packages</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assemble/bin-release.xml</descriptor>
+							</descriptors>
+							<finalName>${project.build.finalName}-${release.buildNumber}</finalName>
+							<appendAssemblyId>true</appendAssemblyId>
+						</configuration>
+					</execution>
+
+					<!-- Generates directory assembly for integration test -->
+					<execution>
+						<id>bin-integration</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assemble/bin-integration.xml</descriptor>
+							</descriptors>
+							<appendAssemblyId>false</appendAssemblyId>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+
+				<executions>
+					<execution>
+						<id>test-makefile-assembly</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>make</executable>
+							<workingDirectory>
+								${project.build.directory}/${project.build.finalName}/${project.build.finalName}/examples
+							</workingDirectory>
+							<arguments>
+								<argument>MIND_ROOT=${project.build.directory}/${project.build.finalName}/${project.build.finalName}</argument>
+								<argument>clean</argument>
+								<argument>all</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+
+<!-- TODO: Restore once "mindoc" is re-integrated in the release as a module and dependency
+					<execution>
+						<id>test-makefile-assembly-doc</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<executable>make</executable>
+							<workingDirectory>
+								${project.build.directory}/${project.build.finalName}/${project.build.finalName}/examples/doc
+							</workingDirectory>
+							<arguments>
+								<argument>MIND_ROOT=${project.build.directory}/${project.build.finalName}/${project.build.finalName}</argument>
+								<argument>check_doc</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+-->
+				</executions>
+			</plugin>
+
+			<!-- User documentation generation -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>copy-docbook-resources</id>
+						<!-- here the phase you need -->
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<outputDirectory>${project.build.directory}/site/images</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/docbkx/images</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.agilejava.docbkx</groupId>
+				<artifactId>docbkx-maven-plugin</artifactId>
+				<inherited>false</inherited>
+				<executions>
+					<!-- User Guide PDF execution -->
+					<execution>
+						<id>pdf</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>generate-pdf</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<targetDirectory>${project.build.directory}/site</targetDirectory>
+							<foCustomization>${project.build.directory}/site/xsl/minddoc-fo.xsl</foCustomization>
+							<draftWatermarkImage>${project.build.directory}/site/images/draft.png</draftWatermarkImage>
+						</configuration>
+					</execution>
+					<!-- User Guide HTML executions -->
+					<execution>
+						<id>html-printable</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<targetDirectory>${project.build.directory}/site/printable</targetDirectory>
+							<imgSrcPath>../</imgSrcPath>
+							<htmlCustomization>${project.build.directory}/site/xsl/minddoc-html-printable.xsl</htmlCustomization>
+							<htmlStylesheet>../css/docbook-printable.css</htmlStylesheet>
+						</configuration>
+					</execution>
+					<execution>
+						<id>userguide-html</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<includes>Mindc-and-plugins-User-guide.xml</includes>
+							<targetDirectory>${project.build.directory}/site</targetDirectory>
+							<htmlCustomization>${project.build.directory}/site/xsl/minddoc-html.xsl</htmlCustomization>
+							<htmlStylesheet>css/docbook.css</htmlStylesheet>
+							<customizationParameters>
+								<parameter>
+									<name>root.path</name>
+									<value>.</value>
+								</parameter>
+								<parameter>
+									<name>pdf.link</name>
+									<value>Mindc-and-plugins-User-guide.pdf</value>
+								</parameter>
+								<parameter>
+									<name>chunked.link</name>
+									<value>userGuide/Mindc-and-plugins-User-guide.html</value>
+								</parameter>
+								<parameter>
+									<name>printable.link</name>
+									<value>printable/Mindc-and-plugins-User-guide.html</value>
+								</parameter>
+							</customizationParameters>
+						</configuration>
+					</execution>
+					<execution>
+						<id>userguide-html-chunked</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<includes>Mindc-and-plugins-User-guide.xml</includes>
+							<chunkedOutput>true</chunkedOutput>
+							<targetDirectory>${project.build.directory}/site/userGuide</targetDirectory>
+							<imgSrcPath>../</imgSrcPath>
+							<htmlCustomization>${project.build.directory}/site/xsl/minddoc-chunk.xsl</htmlCustomization>
+							<htmlStylesheet>../css/docbook-chunk.css</htmlStylesheet>
+							<customizationParameters>
+								<parameter>
+									<name>root.path</name>
+									<value>..</value>
+								</parameter>
+								<parameter>
+									<name>pdf.link</name>
+									<value>../Mindc-and-plugins-User-guide.pdf</value>
+								</parameter>
+								<parameter>
+									<name>single.link</name>
+									<value>../Mindc-and-plugins-User-guide.html</value>
+								</parameter>
+								<parameter>
+									<name>printable.link</name>
+									<value>../printable/Mindc-and-plugins-User-guide.html</value>
+								</parameter>
+							</customizationParameters>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<sourceDirectory>${basedir}/src/docbkx</sourceDirectory>
+					<targetDirectory>${project.build.directory}/site</targetDirectory>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+
+	<profiles>
+		<profile>
+			<id>repo</id>
+
+			<!-- 
+				The standard build from Bamboo OW2 does not rely on repo and does not generate a manifest.xml file.
+				Enable this profile when building with repo to use the right assembly descriptors to package the generated
+				repo manifest, easing modules SHA-1 traceability at build time.
+			-->
+			
+			<activation>
+				<property>
+					<name>repo</name>
+				</property>			
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>2.4</version>
+						<executions>
+							<!-- Generates binary assemblies at package phase. -->
+							<execution>
+								<id>bin-packages</id>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<configuration>
+									<descriptors>
+										<descriptor>src/assemble/bin-release-repo.xml</descriptor>
+									</descriptors>
+									<finalName>${project.build.finalName}-${release.buildNumber}</finalName>
+									<appendAssemblyId>true</appendAssemblyId>
+								</configuration>
+							</execution>
+
+							<!-- Generates directory assembly for integration test -->
+							<execution>
+								<id>bin-integration</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<configuration>
+									<descriptors>
+										<descriptor>src/assemble/bin-integration-repo.xml</descriptor>
+									</descriptors>
+									<appendAssemblyId>false</appendAssemblyId>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
+

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book [
+<!ENTITY % myents SYSTEM "./shared.ent" >
+%myents;
+]>
+<book status="draft" xmlns="http://docbook.org/ns/docbook" version="5.0" xml:lang="en">
+    <info>
+        <revhistory>
+            <revision>
+                <revnumber>0.6</revnumber>
+                <date>2014-12-08</date>
+                <author>
+                    <personname>
+                        <firstname>François</firstname>
+                        <surname>DELOYE</surname>
+                    </personname>
+                </author>
+                <revremark>Added documentation about mindoc</revremark>
+            </revision>
+            <revision>
+                <revnumber>0.5</revnumber>
+                <date>2014-11-28</date>
+                <author>
+                    <personname>
+                        <firstname>François</firstname>
+                        <surname>DELOYE</surname>
+                    </personname>
+                </author>
+                <revremark>Added documentation about mind-diff</revremark>
+            </revision>
+            <revision>
+                <revnumber>0.4</revnumber>
+                <date>2014-11-05</date>
+                <author>
+                    <personname>
+                        <firstname>François</firstname>
+                        <surname>DELOYE</surname>
+                    </personname>
+                </author>
+                <revremark>Added documentation about Deployment style sheet</revremark>
+            </revision>
+            <revision>
+                <revnumber>0.3</revnumber>
+                <date>2014-10-16</date>
+                <author>
+                    <personname>
+                        <firstname>François</firstname>
+                        <surname>DELOYE</surname>
+                    </personname>
+                </author>
+                <revremark>Added documentation about Optimization Back-end</revremark>
+            </revision>
+            <revision>
+                <revnumber>0.2</revnumber>
+                <date>2014-09-15</date>
+                <author>
+                    <personname>
+                        <firstname>François</firstname>
+                        <surname>DELOYE</surname>
+                    </personname>
+                </author>
+                <revremark>Added documentation about C macro generator plugin</revremark>
+            </revision>
+            <revision>
+                <revnumber>0.1</revnumber>
+                <date>2014-08-22</date>
+                <author>
+                    <personname>
+                        <firstname>François</firstname>
+                        <surname>DELOYE</surname>
+                    </personname>
+                </author>
+                <revremark>First revision of <emphasis>&productName;</emphasis> User
+                    Guide as a modular document</revremark>
+            </revision>
+        </revhistory>
+    
+        <title>
+            <emphasis>&productName;</emphasis> User Guide 
+        </title>
+        <subtitle>version <?eval ${project.version}?></subtitle>
+    </info>
+    
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="../../mind-compiler/src/docbkx/userGuide/intro-chapter.xml" />
+    <chapter>
+        <title>MIND language</title>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="../../mind-compiler/src/docbkx/userGuide/adl.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="../../mind-compiler/src/docbkx/userGuide/idl.xml" />
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="../../mind-compiler/src/docbkx/userGuide/c.xml"/>
+    </chapter>
+    <chapter>
+        <title>MIND tool-chain</title>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="../../mind-compiler/src/docbkx/userGuide/toolchain.xml"/>
+        <section>
+            <title>Mind C compiler plugins</title>
+            <para>Some plugins can be added to the Mind C compiler to extend its
+                capabilities.</para>
+            <para>The purpose of the plugins available and the way they are invoked is documented
+                hereafter.</para>
+        </section>
+    </chapter>
+    <appendix>
+        <title>Annex</title>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="../../mind-compiler/src/docbkx/userGuide/advanced.xml" />
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="../../mind-compiler/src/docbkx/userGuide/api.xml"/>
+    </appendix>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="../../mind-compiler/src/docbkx/userGuide/glossary.xml" />
+  
+</book>
