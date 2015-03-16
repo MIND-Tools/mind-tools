@@ -15,6 +15,11 @@
 			<directory>target/dependency/mindc-${modules.common.version}</directory>
 			<outputDirectory />
 		</fileSet>
+
+		<fileSet>
+			<directory>target/dependency/mindoc-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
 	</fileSets>
 
 	<files>
