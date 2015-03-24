@@ -102,6 +102,35 @@
                 capabilities.</para>
             <para>The purpose of the plugins available and the way they are invoked is documented
                 hereafter.</para>
+            <section>
+                <title>Deployment style sheet</title>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                    href="../../global-extensions/src/docbkx/sections/Deployment-Style-Sheet_aim.xml"/>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="../../global-extensions/src/docbkx/sections/Deployment-Style-Sheet_usage.xml"/>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="../../global-extensions/src/docbkx/sections/Deployment-Style-Sheet_syntax.xml"/>
+            </section>
+            <section>
+                <title>Optimization Back-end</title>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                    href="../../Optimization-Backend/src/docbkx/sections/Optimization-backend_aim.xml"/>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="../../Optimization-Backend/src/docbkx/sections/Optimization-backend_usage.xml"/>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="../../Optimization-Backend/src/docbkx/sections/Optimization-backend_annotations.xml"/>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="../../Optimization-Backend/src/docbkx/sections/Optimization-backend_DSS.xml"/>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="../../Optimization-Backend/src/docbkx/sections/Optimization-backend_gains.xml"/>
+            </section>
+            <section>
+                <title>C macro generator plugin</title>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="../../simple-c-macro-generator/src/docbkx/sections/c-macro-generator_aim.xml"/>
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="../../simple-c-macro-generator/src/docbkx/sections/c-macro-generator_usage.xml"/>
+            </section>
         </section>
     </chapter>
     <chapter>
@@ -112,6 +141,22 @@
                 href="../../mindoc/src/docbkx/sections/mindoc_aim.xml"/>
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                 href="../../mindoc/src/docbkx/sections/mindoc_cmd.xml"/>
+        </section>
+        <section>
+            <title>Mind Visual Diff tool</title>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                href="../../mind-visual-diff/src/docbkx/sections/mind-diff_aim.xml"/>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                href="../../mind-visual-diff/src/docbkx/sections/mind-diff_cmd.xml"/>
+        </section>
+        <section>
+            <title>Dependency tools</title>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                href="../../dependency-tools/src/docbkx/sections/dependency-tools_aim.xml"/>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                href="../../dependency-tools/src/docbkx/sections/object-dependencies_cmd.xml"/>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                href="../../dependency-tools/src/docbkx/sections/mind-violation_cmd.xml"/>
         </section>
     </chapter>
     <appendix>

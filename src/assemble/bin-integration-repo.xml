@@ -10,6 +10,21 @@
 	</formats>
 	<includeBaseDirectory>true</includeBaseDirectory>
 
+	<dependencySets>
+		<dependencySet>
+			<useTransitiveDependencies>false</useTransitiveDependencies>
+			<outputDirectory>ext</outputDirectory>
+			<includes>
+				<include>${modules.common.groupId}:iar-extension</include>
+				<include>${modules.common.groupId}:diab-extension</include>
+				<include>${modules.common.groupId}:garbage-composite-annotation</include>
+				<include>${modules.common.groupId}:generic-compiler-extension</include>
+				<include>${modules.common.groupId}:json-dump</include>
+			</includes>
+			<fileMode>0644</fileMode>
+		</dependencySet>
+	</dependencySets>
+
 	<fileSets>
 		<fileSet>
 			<directory>target/dependency/mindc-${modules.common.version}</directory>
@@ -18,6 +33,50 @@
 
 		<fileSet>
 			<directory>target/dependency/mindoc-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/mindunit-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/mindcpp-${modules.cpp.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/global-extensions-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/generic-compiler-executor-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/mindot-viewer-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/dependency-tools-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/dumpdot-annotation-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/mindc-optimizations-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/examples-${modules.common.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/mind-visual-diff-${module.diff.version}</directory>
+			<outputDirectory />
+		</fileSet>
+		<fileSet>
+			<directory>target/dependency/simple-c-macro-generator-${modules.common.version}</directory>
 			<outputDirectory />
 		</fileSet>
 	</fileSets>

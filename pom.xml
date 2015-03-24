@@ -33,6 +33,9 @@
 	<properties>
 		<modules.common.groupId>org.ow2.mind</modules.common.groupId>
 		<modules.common.version>2.2-SNAPSHOT</modules.common.version>
+		<modules.cpp.version>0.1.1-SNAPSHOT</modules.cpp.version>
+		<module.diff.version>0.1.1-SNAPSHOT</module.diff.version>
+		<module.json.version>0.1.0-SNAPSHOT</module.json.version>
 
 		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
 		<release.buildNumber>${maven.build.timestamp}</release.buildNumber>
@@ -41,6 +44,23 @@
 	<modules>
 		<module>mind-compiler</module>
 		<module>mindoc</module>
+		<module>Optimization-Backend</module>
+		<module>global-extensions</module>
+		<module>dumpdot-annotation</module>
+		<module>mindot-viewer</module>
+		<module>mindunit/mindunit-runtime</module>
+		<module>mindunit/mindunit</module>
+		<module>iar-extension</module>
+		<module>diab-extension</module>
+		<module>garbage-composite-annotation</module>
+		<module>mind-cpp</module>
+		<module>generic-compiler-extension</module>
+		<module>generic-compiler-executor</module>
+		<module>dependency-tools</module>
+		<module>examples</module>
+		<module>mind-visual-diff</module>
+		<module>simple-c-macro-generator</module>
+		<module>json-dump</module>
 	</modules>
 
 	<dependencies>
@@ -58,6 +78,129 @@
 			<version>${modules.common.version}</version>
 			<classifier>bin</classifier>
 			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>global-extensions</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>dumpdot-annotation</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>mindot-viewer</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>mindunit</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>iar-extension</artifactId>
+			<version>${modules.common.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>diab-extension</artifactId>
+			<version>${modules.common.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>garbage-composite-annotation</artifactId>
+			<version>${modules.common.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>mindcpp</artifactId>
+			<version>${modules.cpp.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>mindc-optimizations</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>generic-compiler-executor</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>dependency-tools</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>generic-compiler-extension</artifactId>
+			<version>${modules.common.version}</version>
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>examples</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>mind-visual-diff</artifactId>
+			<version>${module.diff.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>simple-c-macro-generator</artifactId>
+			<version>${modules.common.version}</version>
+			<classifier>bin</classifier>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${modules.common.groupId}</groupId>
+			<artifactId>json-dump</artifactId>
+			<version>${module.json.version}</version>
+			<type>jar</type>
 		</dependency>
 	</dependencies>
 
